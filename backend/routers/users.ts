@@ -43,7 +43,7 @@ userRouter.post("/google", async (
 
         if (!user) {
             user = new User({
-                username: email,
+                email: email,
                 password: crypto.randomUUID(),
                 googleId: id,
                 displayName,
@@ -72,6 +72,7 @@ userRouter.post('/register', imagesUpload.single('avatar'), async (
     res,
     next) => {
     try {
+
         const user = new User({
             email: req.body.email,
             password: req.body.password,
