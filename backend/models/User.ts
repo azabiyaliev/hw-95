@@ -65,6 +65,7 @@ const UserSchema = new Schema<
         type: String,
         required: true,
     },
+    googleId: String,
 });
 
 UserSchema.pre("save", async function (next) {
