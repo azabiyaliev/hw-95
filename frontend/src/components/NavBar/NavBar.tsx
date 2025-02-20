@@ -23,7 +23,7 @@ const NavBar = () => {
                         }}>
                             Cocktail builder
                         </Typography>
-                        {user && (user.role === "user") && (<AddFormMenu/>)}
+                        {user && (user.role === "admin" || user.role === "user") && (<AddFormMenu/>)}
                         {user ? <Typography
                             sx={{textDecoration: "none", color: "inherit", fontSize: 14, textTransform: "uppercase"}}
                             to={"/myCocktails"} component={NavLink}>My cocktails</Typography> : null}

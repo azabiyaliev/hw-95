@@ -14,16 +14,15 @@ cocktailsRouter.post('/', imagesUpload.single('image'), auth, permit("admin", "u
     let reqWithUser = req as RequestWithUser;
     const userFromAuth = reqWithUser.user._id;
 
+    const parsedIngredients = req.body.ingredients ? JSON.parse(req.body.ingredients) : [];
+
     const cocktailData = {
         user: userFromAuth,
         title: req.body.title,
         image: req.file ? 'images' + req.file.filename : null,
         recipe: req.body.recipe,
         isPublished: false,
-        ingredients: [{
-            titleOfIngredient: req.body.ingredients.titleOfIngredient,
-            quantity: req.body.ingredients.quantity,
-        }],
+        ingredients:parsedIngredients
     }
 
     try {
