@@ -4,7 +4,7 @@ import RegisterPage from "./features/users/containers/RegisterPage.tsx"
 import LoginPage from "./features/users/containers/LoginPage.tsx";
 import {Typography} from "@mui/material";
 import Cocktails from "./features/cocktails/containers/Cocktails.tsx";
-import "./App.css"
+import CocktailDetails from "./features/cocktails/containers/CocktailDetails.tsx";
 
 const App = () => {
 
@@ -13,10 +13,11 @@ const App = () => {
             <NavBar/>
             <Routes>
                 <Route path="/*" element={<Typography variant="h4" sx={{textAlign: "center"}}>Not found </Typography>}/>
+                <Route path="/" element={<Cocktails/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/cocktails" element={<Cocktails/>}/>
-                <Route path="/" element={<Cocktails/>}/>
+                <Route path="/cocktails/:idCocktail" element={<CocktailDetails/>}/>
             </Routes>
         </>
     )

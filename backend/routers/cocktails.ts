@@ -52,6 +52,23 @@ cocktailsRouter.get('/', async (
     }
 })
 
+cocktailsRouter.get('/:id', async (
+    req,
+    res,
+    next) => {
+    const id = req.params.id;
+    if (!id) {
+        res.status(400).send({error: "Missing ID"});
+        return;
+    }
+    try {
+        const cocktail = await Cocktail.findById(id);
+        res.send(cocktail);
+    } catch (e) {
+        next(e);
+    }
+})
+
 cocktailsRouter.delete('/:id', auth, permit('admin'), async (
     req,
     res,

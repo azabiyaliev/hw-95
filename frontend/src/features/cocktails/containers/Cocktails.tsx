@@ -15,6 +15,7 @@ import {
     Typography
 } from "@mui/material";
 import {apiUrl} from "../../../globalConstants.ts";
+import {NavLink} from "react-router-dom";
 // import {useNavigate} from "react-router-dom";
 
 
@@ -31,7 +32,6 @@ const Cocktails = () => {
         dispatch(getCocktails());
     }, [dispatch])
 
-    console.log(cocktails);
 
     return (
         <Container maxWidth="lg">
@@ -51,8 +51,7 @@ const Cocktails = () => {
                                     return (
                                         <Grid key={cocktail._id} size={4}>
                                             <Card sx={{maxWidth: 345, mb: 2, mt: 5, borderRadius: 2, boxShadow: 3, "&:hover": { boxShadow: 10, color: "#388e3c" }}}>
-                                                <CardActionArea>
-                                                    {/*<CardHeader title={cocktail.title}/>*/}
+                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink}>
                                                     <CardMedia
                                                         style={{width: "100%"}}
                                                         height={400}
