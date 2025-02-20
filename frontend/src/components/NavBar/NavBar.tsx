@@ -12,16 +12,22 @@ const NavBar = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{flexGrow: 1}}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="h6" to="/" component={NavLink} sx={{flexGrow: 1, textDecoration: 'none', color:"inherit", textTransform: "uppercase" }}>
+                        <Typography variant="h6" to="/" component={NavLink} sx={{
+                            flexGrow: 1,
+                            textDecoration: 'none',
+                            color: "inherit",
+                            textTransform: "uppercase"
+                        }}>
                             Cocktail builder
                         </Typography>
-                        {user && (user.role === "admin" || user.role === "user") && (<AddFormMenu/>)}
-                        {user ? <Typography sx={{textDecoration: "none", color: "inherit", fontSize: 14, textTransform: "uppercase"}} to={"/myCocktails"} component={NavLink}>My cocktails</Typography> : null}
+                        {user && (user.role === "user") && (<AddFormMenu/>)}
+                        {user ? <Typography
+                            sx={{textDecoration: "none", color: "inherit", fontSize: 14, textTransform: "uppercase"}}
+                            to={"/myCocktails"} component={NavLink}>My cocktails</Typography> : null}
                         {user ? <UserMenu user={user}/> : <AnonymousMenu/>}
-
                     </Toolbar>
                 </AppBar>
             </Box>

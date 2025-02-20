@@ -42,3 +42,17 @@ export interface ValidationError {
 export interface GlobalError {
     error: string;
 }
+
+export interface ICocktail {
+    _id: string;
+    user: string;
+    title: string;
+    image: string;
+    recipe: string;
+    isPublished: boolean;
+    ingredients: [{
+        _id: string;
+        titleOfIngredient: string;
+        quantity: string;
+    }]
+}

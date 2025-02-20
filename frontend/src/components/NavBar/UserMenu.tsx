@@ -35,7 +35,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
                 color={"inherit"}
             >
                 Hello, {user.displayName}!
-                <Avatar alt={user.displayName} src={user.avatar && user.avatar.startsWith("images/") ? apiUrl + "/" + user.avatar : user.avatar} sx={{ml: 2}} />
+                <Avatar alt={user.displayName} src={user.avatar && user.avatar.startsWith("images/") || user.avatar.startsWith("fixtures/") ? apiUrl + "/" + user.avatar : user.avatar} sx={{ml: 2}} />
 
             </Button>
             <Menu

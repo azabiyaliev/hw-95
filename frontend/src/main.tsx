@@ -14,6 +14,9 @@ import {GOOGLE_CLIENT_ID} from "./globalConstants.ts";
 addInterceptors(store);
 
 const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
     typography: {
         fontFamily: '"Lora", serif',
     },
