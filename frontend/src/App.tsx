@@ -5,7 +5,8 @@ import LoginPage from "./features/users/containers/LoginPage.tsx";
 import {Typography} from "@mui/material";
 import Cocktails from "./features/cocktails/containers/Cocktails.tsx";
 import CocktailDetails from "./features/cocktails/containers/CocktailDetails.tsx";
-import MyCocktails from "./features/cocktails/containers/ MyCocktails.tsx";
+import MyCocktails from "./features/cocktails/containers/MyCocktails.tsx";
+import NewCocktail from "./features/cocktails/containers/NewCocktail.tsx";
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
                 <Route path="/cocktails" element={<Cocktails/>}/>
                 <Route path="/cocktails/:idCocktail" element={<CocktailDetails/>}/>
                 <Route path="/myCocktails" element={<MyCocktails/>}/>
+                <Route path="/addNewCocktail" element={<NewCocktail/>}/>
             </Routes>
         </>
     )

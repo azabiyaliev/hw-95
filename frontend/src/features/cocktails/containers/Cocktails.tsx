@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks.ts";
 import {selectCocktails, selectCocktailsLoading} from "../cocktailsSlice.ts";
 import {selectUser} from "../../users/usersSlice.ts";
 import {useEffect} from "react";
-import {getCocktails} from "../cocktailsThunk.ts";
+import {deleteCocktailById, getCocktails, togglePublished} from "../cocktailsThunk.ts";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import {
@@ -12,11 +12,14 @@ import {
     CardContent,
     CardMedia,
     CircularProgress,
-    Typography
+    Typography,
+    IconButton, CardActions, Button
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import {apiUrl} from "../../../globalConstants.ts";
 import {NavLink} from "react-router-dom";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -26,11 +29,21 @@ const Cocktails = () => {
     const cocktails = useAppSelector(selectCocktails);
     const loading = useAppSelector(selectCocktailsLoading);
     const user = useAppSelector(selectUser);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getCocktails());
     }, [dispatch])
+
+    const deleteCocktail = async (id: string) => {
+        await dispatch(deleteCocktailById(id))
+        navigate(`/`)
+    }
+
+    const publishedCocktail = async (id: string) => {
+        await dispatch(togglePublished(id));
+        navigate(`/`)
+    }
 
 
     return (
@@ -59,14 +72,27 @@ const Cocktails = () => {
                                                         image={apiUrl + "/" + cocktail.image}
                                                         title={cocktail.title}
                                                     />
-                                                    <CardContent>
-                                                        <Typography variant="h6" textAlign="center" fontWeight="bold">{cocktail.title}</Typography>
-                                                    </CardContent>
+                                                    <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                                                        <CardContent>
+                                                            <Typography variant="h6" textAlign="center" fontWeight="bold">{cocktail.title}</Typography>
+                                                        </CardContent>
+                                                        {(user && (user.role === "admin" || (user._id === cocktail.user && !cocktail.isPublished))) ? (
+                                                            <>
+                                                                <CardActions>
+                                                                    <IconButton onClick={() => deleteCocktail(cocktail._id)}>
+                                                                        <DeleteIcon />
+                                                                    </IconButton>
+                                                                </CardActions>
+                                                            </>
+                                                        ) : null}
+                                                    </Box>
                                                     {(user && user.role === "admin") ?
                                                         (!cocktail.isPublished ? (
                                                             <Box
                                                                 sx={{display: "flex", justifyContent: "space-between"}}>
-                                                                <CardContent>Not published</CardContent>
+                                                                <CardContent>Не опубликован</CardContent>
+                                                                <Button onClick={() => publishedCocktail(cocktail._id)}>Опубликовать</Button>
+
                                                             </Box>
                                                         ) : null)
                                                         : null}

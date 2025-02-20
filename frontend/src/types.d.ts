@@ -56,3 +56,10 @@ export interface ICocktail {
         quantity: string;
     }]
 }
+
+export interface Cocktail {
+    title: string;
+    image: File | null;
+    recipe: string;
+    ingredients: string;
+}
