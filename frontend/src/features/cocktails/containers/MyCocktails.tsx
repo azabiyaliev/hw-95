@@ -20,8 +20,6 @@ const MyCocktails = () => {
         dispatch(getCocktails());
     }, [dispatch])
 
-    console.log(cocktails)
-
     return (
         <Container maxWidth="lg">
             <Grid container direction={"row"} spacing={3}>
@@ -49,7 +47,8 @@ const MyCocktails = () => {
                                                 boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)',
                                                 "&:hover": {boxShadow: 10, color: "#388e3c"}
                                             }}>
-                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink} sx={{ flexGrow: 1}}>
+                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink}
+                                                                sx={{flexGrow: 1}}>
                                                     <CardMedia
                                                         style={{width: "100%"}}
                                                         height={400}
@@ -57,7 +56,8 @@ const MyCocktails = () => {
                                                         image={apiUrl + "/" + cocktail.image}
                                                         title={cocktail.title}
                                                     />
-                                                    <CardContent sx={{display: "flex", flexDirection: "column", flexGrow: 1}}>
+                                                    <CardContent
+                                                        sx={{display: "flex", flexDirection: "column", flexGrow: 1}}>
                                                         <Typography variant="h6" textAlign="center"
                                                                     fontWeight="bold">{cocktail.title}</Typography>
                                                         {(user && user._id === cocktail.user && !cocktail.isPublished) ?
