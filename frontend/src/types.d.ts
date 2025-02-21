@@ -1,3 +1,5 @@
+import cocktails from "./features/cocktails/containers/Cocktails.tsx";
+
 export interface IRegister {
     email: string;
     password: string;
@@ -43,6 +45,7 @@ export interface GlobalError {
     error: string;
 }
 
+
 export interface ICocktail {
     _id: string;
     user: string;
@@ -54,7 +57,7 @@ export interface ICocktail {
         _id: string;
         titleOfIngredient: string;
         quantity: string;
-    }]
+    }];
 }
 
 export interface Cocktail {
@@ -63,3 +66,4 @@ export interface Cocktail {
     recipe: string;
     ingredients: string;
 }
+

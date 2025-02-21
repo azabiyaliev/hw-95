@@ -3,7 +3,6 @@ import {IRegister} from "../../../types";
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Avatar, Button } from '@mui/material';
@@ -13,6 +12,7 @@ import {NavLink, useNavigate} from 'react-router-dom';
 import {register} from "../usersThunk.ts";
 import * as React from "react";
 import FileInput from "../../../components/FileInput/FileInput.tsx";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -60,18 +60,23 @@ const RegisterPage = () => {
     }
   };
 
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          border: '1px solid gray',
+          borderRadius: 4,
+          p: 2,
+          boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
+        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+          <HowToRegIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign up
@@ -136,9 +141,9 @@ const RegisterPage = () => {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="center" >
             <Grid >
-              <NavLink to={"/login"}>
+              <NavLink to={"/login"} style={{ textDecoration: 'none', color: 'inherit' }}>
                 Already have an account? Sign in
               </NavLink>
             </Grid>

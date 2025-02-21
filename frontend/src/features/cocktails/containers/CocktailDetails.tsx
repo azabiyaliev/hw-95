@@ -11,8 +11,7 @@ const CocktailDetails = () => {
     const params = useParams<{ idCocktail: string }>();
     const dispatch = useAppDispatch();
     const cocktail = useAppSelector(selectCocktail);
-    const loading = useAppSelector(selectCocktailLoading)
-    console.log(cocktail)
+    const loading = useAppSelector(selectCocktailLoading);
 
     useEffect(() => {
         if (params.idCocktail)
@@ -27,14 +26,25 @@ const CocktailDetails = () => {
             ) : (
                 <>
                     {!cocktail ? (<Typography>Not found cocktail</Typography>) : (
-                        <Box sx={{width: "70%", m: 2, display: 'flex', justifyContent: 'space-between'}}>
+                        <Box sx={{
+                            width: "50%",
+                            mt: 2,
+                            mx: "auto",
+                            display: 'flex',
+                            alignItems: 'stretch',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            border: "1px solid gray",
+                            borderRadius: 4,
+                            boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)',
+                        }}>
                             <CardMedia
                                 component="img"
-                                sx={{height: "600px", width: "100%", objectFit: "contain"}}
+                                sx={{minHeight: "100%", width: "45%", objectFit: "fill", borderBottomLeftRadius: 14, borderTopLeftRadius: 14, }}
                                 src={apiUrl + "/" + cocktail.image}
-                                alt="Long Island Iced Tea"
+                                alt={cocktail.title}
                             />
-                            <CardContent>
+                            <CardContent sx={{width:'55%', minHeight: '100%'}}>
                                 <Typography variant="h5" component="div" fontWeight="bold">
                                     {cocktail.title}
                                 </Typography>

@@ -45,7 +45,7 @@ const CocktailSchema = new Schema({
                 required: true,
             }
         }
-    ]
+    ],
 })
 
 const Cocktail = mongoose.model('Cocktail', CocktailSchema)

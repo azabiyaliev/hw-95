@@ -1,6 +1,12 @@
 import {ICocktail} from "../../types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {deleteCocktailById, getCocktails, getPickedCocktail, postCocktail, togglePublished} from "./cocktailsThunk.ts";
+import {
+    deleteCocktailById,
+    getCocktails,
+    getPickedCocktail,
+    postCocktail,
+    togglePublished
+} from "./cocktailsThunk.ts";
 import {RootState} from "../../app/store.ts";
 
 interface CocktailState {
@@ -87,8 +93,6 @@ export const cocktailsSlice = createSlice({
             .addCase(togglePublished.rejected, (state) => {
                 state.cocktailPublishedLoading = false
             })
-
-
     }
 })
 

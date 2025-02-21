@@ -22,7 +22,6 @@ import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
 
-
 const Cocktails = () => {
 
     const dispatch = useAppDispatch();
@@ -48,7 +47,7 @@ const Cocktails = () => {
 
     return (
         <Container maxWidth="lg">
-            <Grid container direction={"row"}>
+            <Grid container direction={"row"} spacing={3}>
                 {loading ? (
                     <CircularProgress/>
                 ) : (
@@ -63,8 +62,18 @@ const Cocktails = () => {
                                     if (!cocktail.isPublished && !(user && (user.role === "admin"))) return null;
                                     return (
                                         <Grid key={cocktail._id} size={4}>
-                                            <Card sx={{maxWidth: 345, mb: 2, mt: 5, borderRadius: 2, boxShadow: 3, "&:hover": { boxShadow: 10, color: "#388e3c" }}}>
-                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink}>
+                                            <Card sx={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                height: '93%',
+                                                maxWidth: 345,
+                                                mt: 5,
+                                                borderRadius: 2,
+                                                boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)',
+                                                "&:hover": {boxShadow: 10, color: "#388e3c"}
+                                            }}>
+                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink}
+                                                                sx={{flexGrow: 1}}>
                                                     <CardMedia
                                                         style={{width: "100%"}}
                                                         height={400}
@@ -72,30 +81,42 @@ const Cocktails = () => {
                                                         image={apiUrl + "/" + cocktail.image}
                                                         title={cocktail.title}
                                                     />
-                                                    <Box sx={{display: "flex", justifyContent: "space-between"}}>
-                                                        <CardContent>
-                                                            <Typography variant="h6" textAlign="center" fontWeight="bold">{cocktail.title}</Typography>
-                                                        </CardContent>
-                                                        {(user && (user.role === "admin" || (user._id === cocktail.user && !cocktail.isPublished))) ? (
-                                                            <>
-                                                                <CardActions>
-                                                                    <IconButton onClick={() => deleteCocktail(cocktail._id)}>
-                                                                        <DeleteIcon />
-                                                                    </IconButton>
-                                                                </CardActions>
-                                                            </>
-                                                        ) : null}
+                                                    <Box sx={{
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        height: "50%"
+                                                    }}>
+                                                        <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                                                            <CardContent>
+                                                                <Typography variant="h6" textAlign="center"
+                                                                            fontWeight="bold">{cocktail.title}</Typography>
+                                                            </CardContent>
+                                                            {(user && (user.role === "admin" || (user._id === cocktail.user && !cocktail.isPublished))) ? (
+                                                                <>
+                                                                    <CardActions>
+                                                                        <IconButton
+                                                                            onClick={() => deleteCocktail(cocktail._id)}>
+                                                                            <DeleteIcon/>
+                                                                        </IconButton>
+                                                                    </CardActions>
+                                                                </>
+                                                            ) : null}
+                                                        </Box>
+                                                        {(user && user.role === "admin") ?
+                                                            (!cocktail.isPublished ? (
+                                                                <Box
+                                                                    sx={{
+                                                                        display: "flex",
+                                                                        justifyContent: "space-between"
+                                                                    }}>
+                                                                    <CardContent>Не опубликован</CardContent>
+                                                                    <Button
+                                                                        onClick={() => publishedCocktail(cocktail._id)}>Опубликовать</Button>
+                                                                </Box>
+                                                            ) : null)
+                                                            : null}
                                                     </Box>
-                                                    {(user && user.role === "admin") ?
-                                                        (!cocktail.isPublished ? (
-                                                            <Box
-                                                                sx={{display: "flex", justifyContent: "space-between"}}>
-                                                                <CardContent>Не опубликован</CardContent>
-                                                                <Button onClick={() => publishedCocktail(cocktail._id)}>Опубликовать</Button>
 
-                                                            </Box>
-                                                        ) : null)
-                                                        : null}
                                                 </CardActionArea>
                                             </Card>
                                         </Grid>

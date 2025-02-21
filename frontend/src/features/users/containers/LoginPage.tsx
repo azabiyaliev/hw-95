@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import {ILogin} from "../../../types";
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Alert, Avatar, Button} from '@mui/material';
@@ -13,6 +12,7 @@ import {googleLogin, login} from "../usersThunk.ts";
 import * as React from "react";
 import {selectLoginError} from "../usersSlice.ts";
 import {GoogleLogin} from "@react-oauth/google";
+import LoginIcon from '@mui/icons-material/Login';
 
 const LoginPage = () => {
     const dispatch = useAppDispatch();
@@ -50,10 +50,14 @@ const LoginPage = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                }}
+                    border: '1px solid gray',
+                    borderRadius: 4,
+                    p: 2,
+                    boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
+            }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOpenIcon />
+                <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
+                    <LoginIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
@@ -64,16 +68,16 @@ const LoginPage = () => {
                         {loginError.error}
                     </Alert>
                 )}
-
                 <Box sx={{mt: 2}}>
                     <GoogleLogin onSuccess={(credentialResponse) => {
                         if (credentialResponse.credential) {
                             void googleLoginHandler(credentialResponse.credential);
                         }
                     }}
-                    onError={() => alert("Login failed!")}/>
+                                 onError={() => alert("Login failed!")}
+                    />
                 </Box>
-                <Box component="form" noValidate onSubmit={submitHandler} sx={{ mt: 3 }}>
+                <Box component="form" noValidate onSubmit={submitHandler} sx={{mt: 3}}>
                     <Grid container direction={'column'} size={12} spacing={2}>
                         <Grid size={12}>
                             <TextField
@@ -103,13 +107,13 @@ const LoginPage = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{mt: 3, mb: 2}}
                     >
                         Sign In
                     </Button>
-                    <Grid container justifyContent="flex-end">
-                        <Grid >
-                            <NavLink to={"/register"}>
+                    <Grid container justifyContent="center">
+                        <Grid>
+                            <NavLink to={"/register"} style={{textDecoration: 'none', color: 'inherit'}}>
                                 No account yet? Sign Up
                             </NavLink>
                         </Grid>

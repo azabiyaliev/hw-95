@@ -1,12 +1,11 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import Grid from '@mui/material/Grid2';
-import {Button, Card, TextField, Typography} from '@mui/material';
+import {Box, Button, TextField, Typography} from '@mui/material';
 import {Cocktail} from "../../../types";
 import FileInput from "../../../components/FileInput/FileInput.tsx";
 import Container from "@mui/material/Container";
 import * as React from "react";
-
-// import {useAppDispatch} from "../../../app/hooks.ts";
+import ClearIcon from '@mui/icons-material/Clear';
 
 interface Props {
     onSubmit: (cocktail: Cocktail) => void;
@@ -22,7 +21,6 @@ const initialState = {
 const CocktailForm: React.FC<Props> = ({onSubmit}) => {
     const [form, setForm] = useState<Cocktail>(initialState);
     const [ingredients, setIngredients] = useState<{ titleOfIngredient: string, quantity: string }[]>([]);
-    // const dispatch = useAppDispatch();
 
     const submitFormHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -69,11 +67,13 @@ const CocktailForm: React.FC<Props> = ({onSubmit}) => {
     return (
         <form onSubmit={submitFormHandler}>
             <Container maxWidth="xl">
-                <Card
+                <Typography variant={"h5"} sx={{ mt: 4, textAlign: "center"}}>Add new cocktail</Typography>
+                <Box
                     sx={{
                         width: "50%",
                         borderRadius: "10px",
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.6)',
+                        boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)',
+                        border: "1px solid gray",
                         marginTop: 5,
                         mx: "auto",
                         p: 2,
@@ -92,9 +92,9 @@ const CocktailForm: React.FC<Props> = ({onSubmit}) => {
                             />
                         </Grid>
                         <Grid size={{xs: 12}}>
-                            <Typography>Ingredients</Typography>
+                            <Typography>Ingredients:</Typography>
                             {ingredients.map((_ing, i) => (
-                                <Grid container key={i}>
+                                <Grid container key={i}  spacing={2} sx={{mt:1}} alignItems={"center"}>
                                     <Grid>
                                         <TextField
                                             name="titleOfIngredient"
@@ -118,7 +118,9 @@ const CocktailForm: React.FC<Props> = ({onSubmit}) => {
                                     <Grid>
                                         {ingredients.length <= 1 ? null :
                                             <Grid>
-                                                <Button type="button" onClick={() => deleteIngredient(i)}>X</Button>
+                                                <Button type="button" onClick={() => deleteIngredient(i)}>
+                                                    <ClearIcon sx={{color: "red"}}/>
+                                                </Button>
                                             </Grid>
                                         }
                                     </Grid>
@@ -157,7 +159,7 @@ const CocktailForm: React.FC<Props> = ({onSubmit}) => {
                             </Button>
                         </Grid>
                     </Grid>
-                </Card>
+                </Box>
             </Container>
         </form>
     );

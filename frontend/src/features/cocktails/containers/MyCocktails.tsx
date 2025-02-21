@@ -24,7 +24,7 @@ const MyCocktails = () => {
 
     return (
         <Container maxWidth="lg">
-            <Grid container direction={"row"}>
+            <Grid container direction={"row"} spacing={3}>
                 {loading ? (
                     <CircularProgress/>
                 ) : (
@@ -39,8 +39,17 @@ const MyCocktails = () => {
                                     if (!(user && (user._id === cocktail.user))) return null;
                                     return (
                                         <Grid key={cocktail._id} size={4}>
-                                            <Card sx={{maxWidth: 345, mb: 2, mt: 5, borderRadius: 2, boxShadow: 3, "&:hover": { boxShadow: 10, color: "#388e3c" }}}>
-                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink}>
+                                            <Card sx={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                height: '95%',
+                                                maxWidth: 345,
+                                                mt: 5,
+                                                borderRadius: 2,
+                                                boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)',
+                                                "&:hover": {boxShadow: 10, color: "#388e3c"}
+                                            }}>
+                                                <CardActionArea to={`/cocktails/${cocktail._id}`} component={NavLink} sx={{ flexGrow: 1}}>
                                                     <CardMedia
                                                         style={{width: "100%"}}
                                                         height={400}
@@ -48,12 +57,14 @@ const MyCocktails = () => {
                                                         image={apiUrl + "/" + cocktail.image}
                                                         title={cocktail.title}
                                                     />
-                                                    <CardContent>
-                                                        <Typography variant="h6" textAlign="center" fontWeight="bold">{cocktail.title}</Typography>
+                                                    <CardContent sx={{display: "flex", flexDirection: "column", flexGrow: 1}}>
+                                                        <Typography variant="h6" textAlign="center"
+                                                                    fontWeight="bold">{cocktail.title}</Typography>
+                                                        {(user && user._id === cocktail.user && !cocktail.isPublished) ?
+                                                            (<Typography sx={{textAlign: "center"}}>Ваш коктейл
+                                                                находится на рассмотрении модератора</Typography>)
+                                                            : null}
                                                     </CardContent>
-                                                    {(user && user._id === cocktail.user && !cocktail.isPublished) ?
-                                                        (<CardContent sx={{ textAlign: "center", mt: -3 }}>Ваш коктейл находится на рассмотрении модератора</CardContent>)
-                                                        : null}
                                                 </CardActionArea>
                                             </Card>
                                         </Grid>
